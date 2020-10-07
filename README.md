@@ -1,5 +1,9 @@
 # calculator
- A simple calculator to perform operations like add, sub, mult, div and let 
+ A simple calculator to perform operations like add, sub, mult, div and let.
+
+Assumptions made: When you perform div operations, only the integer part will be taken for result. 
+
+i.e. -> div(9,2) will return 4
  
  Checkout the repository and navigate to the location of the repository where it was downloaded and perform the following at the project root directory using terminal/cmd:
  1. Run: mvn install
