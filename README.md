@@ -30,3 +30,5 @@ i.e. -> div(9,2) will return 4
     java -jar -Dlog4j.debug -Dlogging.verbosity=DEBUG calculator-1.0-SNAPSHOT.jar "add(1, mult(2, 3))"
 
     java -jar -Dlog4j.info -Dlogging.verbosity=INFO calculator-1.0-SNAPSHOT.jar "mult(add(2, 2), div(9, 3))"
+
+Travis CI link: https://travis-ci.org/github/vishal266/calculator
