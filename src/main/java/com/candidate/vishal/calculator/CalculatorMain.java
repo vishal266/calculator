@@ -9,6 +9,9 @@ import com.candidate.vishal.calculator.helper.ValidateExpression;
 
 import org.apache.log4j.Logger;
 
+/**
+ * Driver class
+ */
 public class CalculatorMain {
 
     private final static Logger log = Logger.getLogger(CalculatorMain.class);
@@ -29,7 +32,7 @@ public class CalculatorMain {
             log.info("Validation success!");
 
             log.info("Computing the expression for result...");
-            int result = evaluateExpression.evaluate(exp);
+            long result = evaluateExpression.evaluate(exp);
             System.out.println("Output: " + result);
         } catch (InvalidOperationException | ParanthesesMismatchException | InvalidExpressionException | DivideByZeroException e) {
             e.printStackTrace();

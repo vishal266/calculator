@@ -9,6 +9,12 @@ public class ValidateExpression {
 
     private final static Logger log = Logger.getLogger(ValidateExpression.class);
 
+    /**
+     * check for parantheses mismatch
+     * @param expression
+     * @return
+     * @throws ParanthesesMismatchException
+     */
     private boolean checkMatchedParantheses(String expression) throws ParanthesesMismatchException {
         log.debug("Validating parantheses in the expression...");
         int count = 0;
@@ -27,6 +33,13 @@ public class ValidateExpression {
         return count == 0;
     }
 
+    /**
+     * check for the expression validity one by one
+     * @param expression
+     * @throws InvalidOperationException
+     * @throws ParanthesesMismatchException
+     * @throws InvalidExpressionException
+     */
     public void checkExpression(String expression) throws InvalidOperationException, ParanthesesMismatchException, InvalidExpressionException {
         if(expression == null || expression.isEmpty()) {
             log.error("Expression invalid/empty...");
@@ -73,6 +86,14 @@ public class ValidateExpression {
         }
     }
 
+    /**
+     * check for simple expressions without using let
+     * @param expression
+     * @param op
+     * @throws InvalidOperationException
+     * @throws ParanthesesMismatchException
+     * @throws InvalidExpressionException
+     */
     private void checkExpressionForNonLet(String expression, Operation op) throws InvalidOperationException,
             ParanthesesMismatchException, InvalidExpressionException {
         log.debug("Check the expression for regular operations like add, sub, mult, div..." + expression);
@@ -88,6 +109,14 @@ public class ValidateExpression {
     }
 
 
+    /**
+     * check for expressions involving let
+     * @param expression
+     * @param op
+     * @throws InvalidExpressionException
+     * @throws InvalidOperationException
+     * @throws ParanthesesMismatchException
+     */
     private void checkExpressionForLet(String expression, Operation op) throws InvalidExpressionException, InvalidOperationException, ParanthesesMismatchException {
         checkBeginningParanthesis(expression, op.toString().length());
         log.debug("Check the expression for let operations.." + expression);
@@ -104,6 +133,12 @@ public class ValidateExpression {
         checkExpression(exprName);
     }
 
+    /**
+     * Check the begining paranthesis
+     * @param expression
+     * @param prefix
+     * @throws InvalidExpressionException
+     */
     private void checkBeginningParanthesis(String expression, int prefix) throws InvalidExpressionException {
         if (!expression.startsWith("(", prefix)) {
             log.error("No beginning parantheses found. Invalid expression!");
@@ -111,6 +146,11 @@ public class ValidateExpression {
         }
     }
 
+    /**
+     * check if the current string is a number
+     * @param expression
+     * @return
+     */
     private boolean isANumber(String expression) {
         log.debug("Validate for number: " + expression);
         String s = expression;
@@ -125,6 +165,13 @@ public class ValidateExpression {
         return true;
     }
 
+    /**
+     * get the position after parantheses validation
+     * @param expression
+     * @param pre
+     * @param delimiter
+     * @return
+     */
     private int getPosAfterParanthesesValidation(String expression, int pre, char delimiter) {
         log.debug("Expression = " + expression);
         int i = 0;

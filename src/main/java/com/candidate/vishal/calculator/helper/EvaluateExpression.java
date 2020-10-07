@@ -14,18 +14,26 @@ import java.util.Map;
 public class EvaluateExpression {
     private final static Logger log = Logger.getLogger(EvaluateExpression.class);
 
-    public int evaluate(String expression) throws DivideByZeroException, InvalidOperationException, InvalidExpressionException {
+    /**
+     * Method to store items in stack and eventually evaluate them based on precedence.
+     * @param expression
+     * @return
+     * @throws DivideByZeroException
+     * @throws InvalidOperationException
+     * @throws InvalidExpressionException
+     */
+    public long evaluate(String expression) throws DivideByZeroException, InvalidOperationException, InvalidExpressionException {
         log.info("Computing & evaluating the expression for result... " + expression);
         expression = expression.toLowerCase();
         char[] tokens = expression.toCharArray();
         String op;
 
         // Stack for numbers
-        Deque<Integer> values = new ArrayDeque<>();
+        Deque<Long> values = new ArrayDeque<>();
         // Stack for operations
         Deque<String> ops = new ArrayDeque<>();
         // Map to store variables for let
-        Map<String, Integer> variableMapForLet = new HashMap<>();
+        Map<String, Long> variableMapForLet = new HashMap<>();
 
         for (int i = 0; i < tokens.length; i++) {
             if (tokens[i] == ' ' || tokens[i] == ',' || tokens[i] == '(') { // skip
@@ -40,10 +48,10 @@ public class EvaluateExpression {
                 }
                 Operation anOp = Operation.getEnumFromString(ops.peek());
                 if(!ops.isEmpty() && anOp == null) {
-                    variableMapForLet.put(ops.pop(), Integer.parseInt(sb.toString()));
+                    variableMapForLet.put(ops.pop(), Long.parseLong(sb.toString()));
                     ops.pop();
                 } else {
-                    values.push(Integer.parseInt(sb.toString()));
+                    values.push(Long.parseLong(sb.toString()));
                 }
                 i = i - 1;
             } else if (tokens[i] == ')') {  // Closing brace encountered, solve entire expression
@@ -119,7 +127,15 @@ public class EvaluateExpression {
         return values.pop();
     }
 
-    private int performOperation(String op, int b, int a) throws DivideByZeroException {
+    /**
+     * Method to perform the actual operation of numbers involved
+     * @param op
+     * @param b
+     * @param a
+     * @return
+     * @throws DivideByZeroException
+     */
+    private long performOperation(String op, long b, long a) throws DivideByZeroException {
         Operation operation = Operation.getEnumFromString(op);
         switch (operation) {
             case ADD:

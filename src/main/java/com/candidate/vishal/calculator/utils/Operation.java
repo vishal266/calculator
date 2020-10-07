@@ -1,5 +1,8 @@
 package com.candidate.vishal.calculator.utils;
 
+/**
+ * Enum to capture operations from the expression string
+ */
 public enum Operation {
     ADD("add"),
     SUB("sub"),

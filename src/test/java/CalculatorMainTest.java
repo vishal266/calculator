@@ -62,27 +62,27 @@ public class CalculatorMainTest {
     @Test
     public void testSimpleAdd() throws ParanthesesMismatchException, InvalidExpressionException, InvalidOperationException, DivideByZeroException {
         String expr = "add(1, 2)";
-        int expectedResult = 3; // 1 + 2
+        long expectedResult = 3; // 1 + 2
         validateExpression.checkExpression(expr);
-        int actualResult = evaluateExpression.evaluate(expr);
+        long actualResult = evaluateExpression.evaluate(expr);
         assertEquals(expectedResult, actualResult);
     }
 
     @Test
     public void testAddAndMult() throws ParanthesesMismatchException, InvalidExpressionException, InvalidOperationException, DivideByZeroException {
         String expr = "ADD(1, mult(2, 3))";
-        int expectedResult = 7; // 1 + 2 * 3
+        long expectedResult = 7; // 1 + 2 * 3
         validateExpression.checkExpression(expr);
-        int actualResult = evaluateExpression.evaluate(expr);
+        long actualResult = evaluateExpression.evaluate(expr);
         assertEquals(expectedResult, actualResult);
     }
 
     @Test
     public void testMultAddAndDiv() throws ParanthesesMismatchException, InvalidExpressionException, InvalidOperationException, DivideByZeroException {
         String expr = "mult(add(2, 2), div(9, 3))";
-        int expectedResult = 12; // (2 + 2) * (9 / 3)
+        long expectedResult = 12; // (2 + 2) * (9 / 3)
         validateExpression.checkExpression(expr);
-        int actualResult = evaluateExpression.evaluate(expr);
+        long actualResult = evaluateExpression.evaluate(expr);
         assertEquals(expectedResult, actualResult);
     }
 
@@ -91,25 +91,25 @@ public class CalculatorMainTest {
         String expr = "let(a, 5, add(a, a))";
         int expectedResult = 10; // a = 5, a + a
         validateExpression.checkExpression(expr);
-        int actualResult = evaluateExpression.evaluate(expr);
+        long actualResult = evaluateExpression.evaluate(expr);
         assertEquals(expectedResult, actualResult);
     }
 
     @Test
     public void testComplexLet1() throws ParanthesesMismatchException, InvalidExpressionException, InvalidOperationException, DivideByZeroException {
         String expr = "let(a, 5, let(b, mult(a, 10), add(b, a)))";
-        int expectedResult = 55; // a = 5, b = 5 * 10, a + b
+        long expectedResult = 55; // a = 5, b = 5 * 10, a + b
         validateExpression.checkExpression(expr);
-        int actualResult = evaluateExpression.evaluate(expr);
+        long actualResult = evaluateExpression.evaluate(expr);
         assertEquals(expectedResult, actualResult);
     }
 
     @Test
     public void testComplexLet2() throws ParanthesesMismatchException, InvalidExpressionException, InvalidOperationException, DivideByZeroException {
         String expr = "let(a, let(b, 10, add(b, b)), let(b, 20, add(a, b)))";
-        int expectedResult = 40; // a = 20 (b = 10, b + b), b = 20, a + b
+        long expectedResult = 40; // a = 20 (b = 10, b + b), b = 20, a + b
         validateExpression.checkExpression(expr);
-        int actualResult = evaluateExpression.evaluate(expr);
+        long actualResult = evaluateExpression.evaluate(expr);
         assertEquals(expectedResult, actualResult);
     }
 }
